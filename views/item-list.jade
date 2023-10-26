@@ -1,0 +1,9 @@
+extends layout 
+
+block content 
+
+    h1 List of Items 
+
+    each item in item_list 
+        a(href=item.url) #{item.name}
+        hr
