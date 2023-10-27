@@ -1,0 +1,15 @@
+extends layout 
+
+block content 
+
+    h1 #{category.name}
+    p #{category.description}
+   
+    each item in items_in_category 
+        a(href=item.url ) #{item.name}
+        hr
+
+    button(type='button')
+        a(href=category.url+'/update') Update category
+    form(method='post' action=category.url+'/delete')
+        button(type="submit") Delete

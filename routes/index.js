@@ -1,9 +1,9 @@
-var express = require('express');
-var router = express.Router();
+const  express = require('express');
+const  router = express.Router();
+
+const categoryController = require('../controllers/categoryController');
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Inventory Application' });
-});
+router.get('/', categoryController.get_home_page);
 
 module.exports = router;
