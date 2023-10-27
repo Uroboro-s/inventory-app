@@ -2,9 +2,9 @@ extends layout
 
 block content 
 
-    h1 Create a catgeory 
+    h1= title  
 
-    form(method='POST' action='/category/create')
+    form(method='POST' action='')
         input(type='text' placeholder='Enter name' name='name' required='true' value=(category===undefined)?'':category.name)
 
         input(type='text' placeholder='Enter description' name='description' required='true' value=(category === undefined)?'':category.description)

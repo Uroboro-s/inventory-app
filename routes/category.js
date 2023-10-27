@@ -16,7 +16,14 @@ router.post('/create', categoryController.post_category_create);
 //GET category detail page
 router.get('/:category_id', categoryController.get_category_detail);
 
+//GET the update page for item
+router.get('/:category_id/update', categoryController.get_category_update);
 
+//POST the update page for item
+router.post('/:category_id/update', categoryController.post_category_update);
+
+//POST the item to delete
+router.post('/:category_id/delete', categoryController.post_category_delete);
 
 
 module.exports = router;

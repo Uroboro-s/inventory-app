@@ -1,0 +1,31 @@
+extends layout 
+
+block content 
+
+    h1= title  
+
+    form(method='POST' action='')
+        input(type='text' placeholder='Enter name' name='name' required='true' value=(item===undefined)?'':item.name)
+        input(type='text' placeholder='Enter description' name='description' required='true' value=(item === undefined)?'':item.description)
+
+        label(for='category') Category:
+        select#category.form-control(type='select', placeholder='Select category' name='category' required='true' )
+            //- - authors.sort(function(a, b) {let textA = a.family_name.toUpperCase(); let textB = b.family_name.toUpperCase(); return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;});
+            for category in categories
+                if item
+                    option(value=category._id selected=(category._id.toString()===item.category._id.toString() ? 'selected' : false) ) #{category.name}
+                else
+                    option(value=category._id) #{category.name}
+
+        input(type='number' placeholder='Enter price' name='price' required='true' value=(item === undefined)?'':item.price)
+        input(type='number' placeholder='Enter quantity' name='quantity' required='true' value=(item === undefined)?'':item.quantity)
+
+        button(type='submit') Submit
+
+        if errors 
+            each error in errors 
+                p #{error.msg}
+        if form_error 
+            p #{form_error}
+
+           

@@ -7,5 +7,11 @@ block content
     a(href=item.category.url) #{item.category.name}
     p INR #{item.price}
     p Pieces left: #{item.quantity}
-   
+    hr
+    button(type="button") 
+        a(href=item.url+'/update') Update
+    form(method="post" action=item.url+'/delete')
+        button(type="submit") Delete
+            
+    
     
