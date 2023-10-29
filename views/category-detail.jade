@@ -1,7 +1,7 @@
 extends layout 
 
 block content 
-
+    script(src='/javascripts/category.js' defer)
     h1 #{category.name}
     p #{category.description}
    
@@ -12,4 +12,9 @@ block content
     button(type='button')
         a(href=category.url+'/update') Update category
     form(method='post' action=category.url+'/delete')
-        button(type="submit") Delete
+        input.delete-input.hidden(type='password' placeholder='enter passskey' name='passkey' required='true')
+        button.delete-modal(type="button") Delete
+        .confirm-panel-delete.hidden
+            button(type="submit") Confirm
+        if error 
+         p= error

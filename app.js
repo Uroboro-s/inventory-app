@@ -3,12 +3,23 @@ const  express = require('express');
 const  path = require('path');
 const  cookieParser = require('cookie-parser');
 const  logger = require('morgan');
+const multer = require('multer');
 
 const  indexRouter = require('./routes/index');
 const  categoryRouter = require('./routes/category');
 const itemRouter = require('./routes/item');
 
 const  app = express();
+
+/* exports.storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, './uploads');
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.originalname);
+  }
+}); */
+
 
 //Set up mongoDB connection
 const mongoose = require("mongoose");

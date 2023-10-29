@@ -1,6 +1,20 @@
 const Item = require('../models/item');
 const Category = require('../models/category');
 
+const multer = require('multer');
+//const upload = multer({dest: 'uploads/'});
+
+
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, './uploads');
+    },
+    filename: function (req, file, cb) {
+      cb(null, file.originalname);
+    }
+  });
+const upload = multer({ storage: storage});
+
 const asyncHandler = require('express-async-handler');
 const { body, validationResult } = require('express-validator');
 
@@ -48,15 +62,32 @@ exports.post_item_create = [
     .escape(),
     
     asyncHandler ( async (req, res, next) => {
+        var file_url = 'hi';
+        /* upload.single('avatar')(req, res, (err) =>{
+            console.log(req.file.originalname);
+            console.log(file_url);
+            file_url = req.file.originalname;
+            console.log(file_url);
+        }); */
+        
+
+        const uploadObj = upload.single('avatar');
+
+        const url = uploadObj(req, res, (err)=>{
+            let temp = req.file.originalname;
+            console.log(temp);
+        });
+
         const errors = validationResult(req);
         const allCategories = await Category.find().exec();
-
+        
         const item = new Item({
             name: req.body.name,
             description: req.body.description,
             category: req.body.category,
             price: req.body.price,
             quantity: req.body.quantity,
+            image: "yo",
         });
 
         if(!errors.isEmpty()) {
@@ -80,9 +111,9 @@ exports.post_item_create = [
             });
             return ;
         } else {
-            await item.save();
+            //await item.save();
 
-            res.redirect(item.url);
+            //res.redirect(item.url);
         }
         
     })

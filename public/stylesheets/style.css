@@ -19,3 +19,14 @@ form {
   gap: 20px;
 }
 
+.hidden {
+  display: none;
+}
+
+.delete-input {
+  height: 100px;
+
+}
+.confirm-panel-delete {
+  height: 100px;
+}
