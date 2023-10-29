@@ -4,7 +4,8 @@ block content
 
     h1= title  
 
-    form(method='POST' action='')
+    form(method='POST' action='' enctype="multipart/form-data")
+        input(type="file" name='avatar')
         input(type='text' placeholder='Enter name' name='name' required='true' value=(item===undefined)?'':item.name)
         input(type='text' placeholder='Enter description' name='description' required='true' value=(item === undefined)?'':item.description)
 

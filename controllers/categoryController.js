@@ -146,19 +146,28 @@ exports.post_category_update = [
 ];
 
 exports.post_category_delete = asyncHandler( async (req, res, next) =>{
-    console.log(req.params.category_id);
     const category = await Category.findById(req.params.category_id).exec();
     const itemsWithGivenCategory = await Item.find({category: req.params.category_id}).exec();
 
-    if(itemsWithGivenCategory.length > 0) {
-        res.render('category-delete', {
-            title: "Delete items to continue",
+    if(req.body.passkey !== 'admin123') {
+        res.render("category-detail", {
+            title: "Category Detail",
             category: category,
-            delete_items: itemsWithGivenCategory,
+            items_in_category: itemsWithGivenCategory,
+            error: 'Incorrect admin key',
         });
+        return ;
     } else {
-        console.log(category);
-        await Category.findByIdAndDelete(req.params.category_id);
-        res.redirect('/category');
+        if(itemsWithGivenCategory.length > 0) {
+            res.render('category-delete', {
+                title: "Delete items to continue",
+                category: category,
+                delete_items: itemsWithGivenCategory,
+            });
+        } else {
+            console.log(category);
+            await Category.findByIdAndDelete(req.params.category_id);
+            res.redirect('/category');
+        }
     }
 });
